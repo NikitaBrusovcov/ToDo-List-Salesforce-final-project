@@ -1,0 +1,16 @@
+FinalProect/.eslintignore
+FinalProect/.forceignore
+FinalProect/.gitignore
+FinalProect/.prettierignore
+FinalProect/.prettierrc
+FinalProect/package.json
+FinalProect/README.md
+FinalProect/sfdx-project.json
+FinalProect/.vscode/extensions.json
+FinalProect/.vscode/launch.json
+FinalProect/.vscode/settings.json
+FinalProect/config/project-scratch-def.json
+FinalProect/force-app/main/default/aura/.eslintrc.json
+FinalProect/force-app/main/default/lwc/.eslintrc.json
+FinalProect/scripts/apex/hello.apex
+FinalProect/scripts/soql/account.soql
