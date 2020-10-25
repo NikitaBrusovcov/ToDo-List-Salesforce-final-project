@@ -11,12 +11,11 @@ public with sharing class QueueAssignmentTriggerHelper {
     
         for(Task_ToDo__c taskRecordName:newObjects){
             for(RecordType taskRecType:taskRecordTypes){
-            
-                if(taskRecordName.recordtypeid == taskRecType.id){
+                if(taskRecordName.recordtypeid == taskRecType.id && taskRecordName.My_Task__c==false){
                     if(taskRecType.name == 'DeveloperTaskToDo' ){
                         taskRecordName.ownerid=developerQueue[0].queueid;
                     }
-                    if(taskRecType.name == 'MarcetingTaskToDO' ){
+                    if(taskRecType.name == 'MarcetingTaskToDo' ){
                         taskRecordName.ownerid=marcetingQueue[0].queueid;
                     }
                 }
