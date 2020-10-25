@@ -1,0 +1,100 @@
+<template>
+   
+    <lightning-card
+        title="My tasks"
+        icon-name="custom:custom63"
+    >
+        <div class="slds-var-m-around_medium">
+            <lightning-accordion allow-multiple-sections-open>
+                <template for:each={tasks} for:item="task">
+                    <lightning-accordion-section name={task.Name} key={task.Id} label={task.Name}>
+                        
+                        <div class="slds-col slds-size_4-of-12">
+                                                            
+                            <template if:true={task.Start_Date__c}>
+                                Start Date: <span>{task.Start_Date__c}</span>
+                            </template>
+                            <template if:false={task.Start_Date__c}>
+                                Start Date: <span>Date not set</span>
+                            </template>
+                        </div>
+
+                        <div class="slds-col slds-size_4-of-12">
+                            <template if:true={task.Deadline_Date__c}>
+                                Deadline Date: <span>{task.Deadline_Date__c}</span>
+                            </template>
+                            <template if:false={task.Deadline_Date__c}>
+                                Deadline Date: <span>Date not set</span>
+                            </template>
+                        </div>
+
+                        <div class="slds-col slds-size_4-of-12">
+                            <template if:true={task.Finish_Date__c}>
+                                Finish Date: <span>{task.Finish_Date__c}</span>
+                            </template>
+                            <template if:false={task.Finish_Date__c}>
+                                Finish Date: <span>Date not set</span>
+                            </template>
+                        </div>
+
+                        <div class="slds-col slds-size_4-of-12">
+                                Status: <span>{task.Status__c}</span>
+                        </div>
+
+                        <div class="slds-col slds-size_12-of-12 description">
+                            <template if:true={task.Description__c}>
+                                Description: <span>{task.Description__c}</span>
+                            </template>
+                            <template if:false={task.Description__c}>
+                                Description: <span>Description not set</span>
+                            </template>
+                        </div>
+                        
+                        <div class="list-first">
+                            <template for:each={task.Subtasks_ToDo__r} for:item="subtask">
+                                <lightning-layout class="slds-var-m-vertical_x-small" key={subtask.Id}>   
+                                    <lightning-layout-item>
+                                        <template if:true={subtask.Done__c}>
+                                            <lightning-input  class="slds-p-left_xx-large" checked type="checkbox"
+                                                                value={subtask.Done__c} read-only='true'>
+                                            </lightning-input>
+                                         </template>
+                                         <template if:false={subtask.Done__c}>
+                                            <lightning-input  class="slds-p-left_xx-large" type="checkbox" data-field="Done"
+                                                                value={subtask.Done__c} read-only='true'> 
+                                            </lightning-input>
+                                         </template>
+                                    </lightning-layout-item>
+                                
+                                    <lightning-layout-item flexibility="grow">
+                                            {subtask.Name}
+                                    </lightning-layout-item>
+
+                                    <lightning-layout-item>
+                                        <lightning-button-icon 
+                                            label='delete'
+                                            icon-name="utility:delete"
+                                            onclick={deleteSubTask}
+                                            data-recordid={subtask.Id}
+                                        ></lightning-button-icon>
+                                    </lightning-layout-item>
+                                
+                                </lightning-layout>
+                            </template>
+                        </div>
+
+                    </lightning-accordion-section>
+
+                </template>
+
+                <template if:true={error}>
+                    <p>{error}</p>>
+                </template>
+             
+            </lightning-accordion>
+        </div>
+    </lightning-card> 
+
+    
+
+</template>
