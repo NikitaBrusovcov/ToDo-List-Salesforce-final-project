@@ -2,7 +2,11 @@ import { LightningElement,  wire, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import { refreshApex } from '@salesforce/apex';
 import { deleteRecord } from 'lightning/uiRecordApi';
+import { updateRecord } from 'lightning/uiRecordApi';
 import fetchTaskToDoList from '@salesforce/apex/TaskToDoController.fetchTaskToDoList';
+
+import ID_FIELD from '@salesforce/schema/SubTask__c.Id';
+import DONE__C_FIELD from '@salesforce/schema/SubTask__c.Done__c';
 
 export default class TaskToDoView extends LightningElement {
     @track tasks;
@@ -20,6 +24,43 @@ export default class TaskToDoView extends LightningElement {
             this.error = result.error;
             this.tasks = undefined;
         }
+    }
+
+
+    updateSubTaskStatus(event) {
+        let status = event.target.dataset.done;
+        if(status == 'true'){
+            status = false;
+        } else{
+            status = true;
+        }
+       
+        const fields = {};
+        fields[ID_FIELD.fieldApiName] = event.target.dataset.recordid;
+        fields[DONE__C_FIELD.fieldApiName] = status;
+
+        const recordInput = { fields };
+
+        updateRecord(recordInput)
+            .then(() => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Success',
+                        message: 'Subtask status updated',
+                        variant: 'success'
+                    })
+                );
+                return refreshApex(this.wiredTaskResult);
+            })
+            .catch(error => {
+                this.dispatchEvent(
+                    new ShowToastEvent({
+                        title: 'Error updating status of record',
+                        message: error.body.message,
+                        variant: 'error'
+                    })
+                );
+            });
     }
 
     deleteSubTask(event){
@@ -46,5 +87,6 @@ export default class TaskToDoView extends LightningElement {
                 );
             });
     }
+
 }
 

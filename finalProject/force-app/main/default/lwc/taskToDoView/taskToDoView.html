@@ -53,17 +53,11 @@
                         <div class="list-first">
                             <template for:each={task.Subtasks_ToDo__r} for:item="subtask">
                                 <lightning-layout class="slds-var-m-vertical_x-small" key={subtask.Id}>   
+
                                     <lightning-layout-item>
-                                        <template if:true={subtask.Done__c}>
-                                            <lightning-input  class="slds-p-left_xx-large" checked type="checkbox"
-                                                                value={subtask.Done__c} read-only='true'>
-                                            </lightning-input>
-                                         </template>
-                                         <template if:false={subtask.Done__c}>
-                                            <lightning-input  class="slds-p-left_xx-large" type="checkbox" data-field="Done"
-                                                                value={subtask.Done__c} read-only='true'> 
-                                            </lightning-input>
-                                         </template>
+                                        <lightning-input  class="slds-p-left_xx-large" checked={subtask.Done__c} type="checkbox"
+                                                            value={subtask.Done__c}  onchange={updateSubTaskStatus} data-recordid={subtask.Id} data-done={subtask.Done__c}>
+                                        </lightning-input>
                                     </lightning-layout-item>
                                 
                                     <lightning-layout-item flexibility="grow">
