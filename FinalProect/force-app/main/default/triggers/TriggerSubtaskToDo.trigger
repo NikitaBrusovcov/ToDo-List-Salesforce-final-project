@@ -7,5 +7,9 @@ trigger TriggerSubtaskToDo on SubTask__c (before insert, after insert, before up
     if(Trigger.isUpdate && Trigger.isAfter){
         SubtaskToDoTriggerHandler.OnAfterUpdate(Trigger.new);
     }
+    
+    if(Trigger.isDelete && Trigger.isAfter){
+       SubtaskToDoTriggerHandler.OnAfterDelete(Trigger.old);
+    }
   
 }
