@@ -8,7 +8,24 @@
             <lightning-accordion allow-multiple-sections-open>
                 <template for:each={tasks} for:item="task">
                     <lightning-accordion-section name={task.Name} key={task.Id} label={task.Name}>
-                        
+                        <lightning-layout-item >
+                            <lightning-button-icon 
+                                    label='edit'
+                                    icon-name="utility:edit"
+                                    onclick={showTaskEditWindow}
+                                ></lightning-button-icon>
+                        </lightning-layout-item>
+                    
+                        <c-edit-task-window
+                        show-edit-task-window={showEditTaskWindow} 
+                        show-positive={showPositiveButton}
+                        positive-button-label={positiveButtonLabel} 
+                        show-negative={showNegativeButton}
+                        onpositive={closeTaskEditWindow}
+                        onclose={closeTaskEditWindow}
+                        task-todo-obj={task}/>
+                        </c-edit-task-window>
+
                         <div class="slds-col slds-size_4-of-12">
                                                             
                             <template if:true={task.Start_Date__c}>
@@ -104,7 +121,7 @@
                                 show-negative={showNegativeButton}
                                 onpositive={closeSubTaskEditWindow}
                                 onclose={closeSubTaskEditWindow}
-                                task-todo-obj={subtask}/>
+                                sub-task-obj={subtask}/>
                                 </c-edit-sub-task-window>
 
                                     <lightning-layout-item>

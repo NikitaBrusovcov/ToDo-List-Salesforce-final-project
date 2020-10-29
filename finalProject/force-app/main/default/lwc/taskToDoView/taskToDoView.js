@@ -13,9 +13,19 @@ export default class TaskToDoView extends LightningElement {
 
     @track showAddSubTaskWindow = false;
     @track showEditSubTaskWindow = false;
+    @track showEditTaskWindow = false;
     @track showNegativeButton;
     @track showPositiveButton = true;
     @track positiveButtonLabel = 'Close';
+
+    closeTaskEditWindow() {
+        this.showEditTaskWindow = false;
+        return refreshApex(this.wiredTaskResult);
+    }
+
+    showTaskEditWindow() {
+      this.showEditTaskWindow = true;
+    }
 
     closeSubTaskEditWindow() {
         this.showEditSubTaskWindow = false;

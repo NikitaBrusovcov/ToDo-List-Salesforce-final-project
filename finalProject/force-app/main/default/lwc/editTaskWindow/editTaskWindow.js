@@ -2,17 +2,17 @@ import { LightningElement, api } from 'lwc';
 
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
-export default class EditSubTaskWindow extends LightningElement {
+export default class EditTaskWindow extends LightningElement {
   @api showPositive;
   @api showNegative;
   @api positiveButtonLabel = 'Save';
   @api negativeButtonLabel = 'Cancel';
-  @api showEditSubTaskWindow;
-  @api subTaskObj;
+  @api showEditTaskWindow;
+  @api taskTodoObj;
 
   handleSuccess(event) {
     const evt = new ShowToastEvent({
-        title: "SubTask was edited",
+        title: "Task was edited",
         message: "Record ID: " + event.detail.id,
         variant: "success"
     });
@@ -23,8 +23,8 @@ export default class EditSubTaskWindow extends LightningElement {
     super();
     this.showNegative = true;
     this.showPositive = true;
-    this.showEditSubTaskWindow = false;
-    this.subTaskObj=null;
+    this.showEditTaskWindow = false;
+    this.taskTodoObj=null;
   }
 
   handlePositive() {
