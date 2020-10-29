@@ -64,7 +64,7 @@
                                 </lightning-layout-item>
                             
                                 <c-add-sub-task-window
-                                show-window={showWindow} 
+                                show-add-sub-task-window={showAddSubTaskWindow} 
                                 show-positive={showPositiveButton}
                                 positive-button-label={positiveButtonLabel} 
                                 show-negative={showNegativeButton}
@@ -87,6 +87,25 @@
                                     <lightning-layout-item flexibility="grow">
                                             {subtask.Name}
                                     </lightning-layout-item>
+
+                                    
+                                <lightning-layout-item >
+                                    <lightning-button-icon 
+                                            label='edit'
+                                            icon-name="utility:edit"
+                                            onclick={showSubTaskEditWindow}
+                                        ></lightning-button-icon>
+                                </lightning-layout-item>
+                            
+                                <c-edit-sub-task-window
+                                show-edit-sub-task-window={showEditSubTaskWindow} 
+                                show-positive={showPositiveButton}
+                                positive-button-label={positiveButtonLabel} 
+                                show-negative={showNegativeButton}
+                                onpositive={closeSubTaskEditWindow}
+                                onclose={closeSubTaskEditWindow}
+                                task-todo-obj={subtask}/>
+                                </c-edit-sub-task-window>
 
                                     <lightning-layout-item>
                                         <lightning-button-icon 

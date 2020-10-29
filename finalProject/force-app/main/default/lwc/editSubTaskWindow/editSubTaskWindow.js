@@ -1,26 +1,23 @@
 import { LightningElement, api } from 'lwc';
 
+
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 
 import SUBTASK_OBJECT from '@salesforce/schema/SubTask__c';
-import NAMES_FIELD from '@salesforce/schema/SubTask__c.Name';
-import DONE__C_FIELD from '@salesforce/schema/SubTask__c.Done__c';
-import TASK_TODO__C_FIELD from '@salesforce/schema/SubTask__c.Task_ToDo__c';
 
-export default class AddSubTaskWindow extends LightningElement {
+export default class EditSubTaskWindow extends LightningElement {
   @api showPositive;
   @api showNegative;
   @api positiveButtonLabel = 'Save';
   @api negativeButtonLabel = 'Cancel';
-  @api showAddSubTaskWindow;
+  @api showEditSubTaskWindow;
   @api taskTodoObj;
 
   subTaskObject = SUBTASK_OBJECT;
-  myFields = [NAMES_FIELD, DONE__C_FIELD,TASK_TODO__C_FIELD];
 
   handleSuccess(event) {
     const evt = new ShowToastEvent({
-        title: "SubTask was created",
+        title: "SubTask was edited",
         message: "Record ID: " + event.detail.id,
         variant: "success"
     });
@@ -31,7 +28,7 @@ export default class AddSubTaskWindow extends LightningElement {
     super();
     this.showNegative = true;
     this.showPositive = true;
-    this.showAddSubTaskWindow = false;
+    this.showEditSubTaskWindow = false;
     this.taskTodoObj=null;
   }
 

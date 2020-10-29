@@ -1,5 +1,5 @@
 <template>
-    <template if:true={showAddSubTaskWindow}>
+    <template if:true={showEditSubTaskWindow}>
         <div>
             <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
                 aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
@@ -18,12 +18,20 @@
                             
                     <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1" style="min-width: 1100px;">
                         <slot name="body">
-                            Current task name: {taskTodoObj}
-                            <lightning-record-form
-                                object-api-name={subTaskObject}
-                                fields={myFields}
-                                onsuccess={handleSuccess}>
-                            </lightning-record-form>
+                            <lightning-record-edit-form object-api-name="SubTask__c" onsuccess={handleSuccess} record-id={taskTodoObj.Id}>
+                                <lightning-messages></lightning-messages>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field field-name="Name" value={taskTodoObj.Name}></lightning-input-field>
+                                        <lightning-input-field field-name="Done__c"  value={taskTodoObj.Done__c}></lightning-input-field>
+                                    </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                        <lightning-input-field read-only='true' field-name="Task_ToDo__c" value={taskTodoObj.Task_ToDo__c}></lightning-input-field>
+                        
+                                    </div>
+                                 </div>
+                                <lightning-button type="submit" variant="brand" label="Edit SubTask"></lightning-button>
+                            </lightning-record-edit-form>
                         </slot>
                     </div>
                     <footer class="slds-modal__footer" style="min-width: 1100px;">

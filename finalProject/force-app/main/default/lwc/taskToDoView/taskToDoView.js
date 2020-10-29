@@ -11,18 +11,28 @@ import DONE__C_FIELD from '@salesforce/schema/SubTask__c.Done__c';
 
 export default class TaskToDoView extends LightningElement {
 
-    @track showWindow = false;
+    @track showAddSubTaskWindow = false;
+    @track showEditSubTaskWindow = false;
     @track showNegativeButton;
     @track showPositiveButton = true;
     @track positiveButtonLabel = 'Close';
 
+    closeSubTaskEditWindow() {
+        this.showEditSubTaskWindow = false;
+        return refreshApex(this.wiredTaskResult);
+    }
+
+    showSubTaskEditWindow() {
+      this.showEditSubTaskWindow = true;
+    }
+
     closeSubTaskAddWindow() {
-        this.showWindow = false;
+        this.showAddSubTaskWindow = false;
         return refreshApex(this.wiredTaskResult);
     }
 
     showSubTaskAddWindow() {
-      this.showWindow = true;
+      this.showAddSubTaskWindow = true;
     }
 
     @track tasks;
