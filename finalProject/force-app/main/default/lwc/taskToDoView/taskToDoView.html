@@ -51,6 +51,30 @@
                         </div>
                         
                         <div class="list-first">
+
+                            <lightning-layout class="slds-var-m-vertical_x-small"> 
+                                
+                                <lightning-layout-item flexibility="grow">
+                                    <h1 class="head-title">SubTasks</h1>
+                                 </lightning-layout-item>
+
+                                <lightning-layout-item >
+                                    <lightning-button variant="brand" label="Create SubTask" title="Create SubTask" 
+                                    onclick={showSubTaskAddWindow} class="slds-m-left_x-small"></lightning-button>
+                                </lightning-layout-item>
+                            
+                                <c-add-sub-task-window
+                                show-window={showWindow} 
+                                show-positive={showPositiveButton}
+                                positive-button-label={positiveButtonLabel} 
+                                show-negative={showNegativeButton}
+                                onpositive={closeSubTaskAddWindow}
+                                onclose={closeSubTaskAddWindow}
+                                task-todo-obj={task.Name}/>
+                                </c-add-sub-task-window>
+
+                            </lightning-layout>
+
                             <template for:each={task.Subtasks_ToDo__r} for:item="subtask">
                                 <lightning-layout class="slds-var-m-vertical_x-small" key={subtask.Id}>   
 

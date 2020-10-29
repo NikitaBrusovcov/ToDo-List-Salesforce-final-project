@@ -8,7 +8,23 @@ import fetchTaskToDoList from '@salesforce/apex/TaskToDoController.fetchTaskToDo
 import ID_FIELD from '@salesforce/schema/SubTask__c.Id';
 import DONE__C_FIELD from '@salesforce/schema/SubTask__c.Done__c';
 
+
 export default class TaskToDoView extends LightningElement {
+
+    @track showWindow = false;
+    @track showNegativeButton;
+    @track showPositiveButton = true;
+    @track positiveButtonLabel = 'Close';
+
+    closeSubTaskAddWindow() {
+        this.showWindow = false;
+        return refreshApex(this.wiredTaskResult);
+    }
+
+    showSubTaskAddWindow() {
+      this.showWindow = true;
+    }
+
     @track tasks;
     error;
 
