@@ -138,8 +138,9 @@
                         </div>
 
                     </lightning-accordion-section>
-
+                   
                 </template>
+                <c-pagination  onprevious={previousHandler2} onnext={nextHandler2} onselected={changeHandler2} onfirstpage={firstpagehandler} onlastpage={lastpagehandler}></c-pagination>
 
                 <template if:true={error}>
                     <p>{error}</p>>
