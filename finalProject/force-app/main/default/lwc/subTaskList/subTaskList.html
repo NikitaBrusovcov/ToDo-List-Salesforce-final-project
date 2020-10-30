@@ -1,0 +1,71 @@
+<template>
+    <div class="list-first">
+
+        <lightning-layout class="slds-var-m-vertical_x-small"> 
+
+            <lightning-layout-item flexibility="grow">
+                <h1 class="head-title">SubTasks</h1>
+             </lightning-layout-item>
+
+            <lightning-layout-item >
+                <lightning-button variant="brand" label="Create SubTask" title="Create SubTask" 
+                onclick={showSubTaskAddWindow} class="slds-m-left_x-small"></lightning-button>
+            </lightning-layout-item>
+        
+            <c-add-sub-task-window
+            show-add-sub-task-window={showAddSubTaskWindow} 
+            show-positive={showPositiveButton}
+            positive-button-label={positiveButtonLabel} 
+            show-negative={showNegativeButton}
+            onpositive={closeSubTaskAddWindow}
+            onclose={closeSubTaskAddWindow}
+            task-todo-obj={task.Name}/>
+            </c-add-sub-task-window>
+
+        </lightning-layout>
+
+        <template for:each={task.Subtasks_ToDo__r} for:item="subtask">
+            <lightning-layout class="slds-var-m-vertical_x-small" key={subtask.Id}>   
+
+                <lightning-layout-item>
+                    <lightning-input  class="slds-p-left_xx-large" checked={subtask.Done__c} type="checkbox"
+                                        value={subtask.Done__c}  onchange={updateSubTaskStatus} data-recordid={subtask.Id} data-done={subtask.Done__c}>
+                    </lightning-input>
+                </lightning-layout-item>
+            
+                <lightning-layout-item flexibility="grow">
+                        {subtask.Name}
+                </lightning-layout-item>
+
+                
+            <lightning-layout-item >
+                <lightning-button-icon 
+                        label='edit'
+                        icon-name="utility:edit"
+                        onclick={showSubTaskEditWindow}
+                    ></lightning-button-icon>
+            </lightning-layout-item>
+        
+            <c-edit-sub-task-window
+            show-edit-sub-task-window={showEditSubTaskWindow} 
+            show-positive={showPositiveButton}
+            positive-button-label={positiveButtonLabel} 
+            show-negative={showNegativeButton}
+            onpositive={closeSubTaskEditWindow}
+            onclose={closeSubTaskEditWindow}
+            sub-task-obj={subtask}/>
+            </c-edit-sub-task-window>
+
+                <lightning-layout-item>
+                    <lightning-button-icon 
+                        label='delete'
+                        icon-name="utility:delete"
+                        onclick={deleteSubTask}
+                        data-recordid={subtask.Id}
+                    ></lightning-button-icon>
+                </lightning-layout-item>
+            
+            </lightning-layout>
+        </template>
+    </div>
+</template>

@@ -27,14 +27,17 @@
                                     </div>
                                     <div class="slds-col slds-size_1-of-2">
                                         <lightning-input-field read-only='true' field-name="Status__c" value={taskTodoObj.Status__c}></lightning-input-field>
-                                        <lightning-input-field field-name="Deadline_Date__c"  value={taskTodoObj.Deadline_Date__c}></lightning-input-field>
+                                        <lightning-input-field field-name="Assignment_User__c"  value={taskTodoObj.Assignment_User__c}></lightning-input-field>
                                     </div>
                                  </div>
                                 <div class="slds-grid">
                                     <div class="slds-col slds-size_1-of-2">
                                          <lightning-input-field field-name="Start_Date__c" value={taskTodoObj.Start_Date__c}></lightning-input-field>
-                                         <lightning-input-field field-name="Description__c"  value={taskTodoObj.Description__c}></lightning-input-field>
+                                         <lightning-input-field field-name="Deadline_Date__c"  value={taskTodoObj.Deadline_Date__c}></lightning-input-field>
                                     </div>
+                                    <div class="slds-col slds-size_1-of-2">
+                                      <lightning-input-field field-name="Description__c"  value={taskTodoObj.Description__c}></lightning-input-field>
+                                   </div>
                                 </div> 
                                 <lightning-button type="submit" variant="brand" label="Edit Task"></lightning-button>
                             </lightning-record-edit-form>

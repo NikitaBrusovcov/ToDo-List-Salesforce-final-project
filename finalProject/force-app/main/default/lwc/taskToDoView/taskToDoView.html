@@ -8,135 +8,86 @@
             <lightning-accordion allow-multiple-sections-open>
                 <template for:each={tasks} for:item="task">
                     <lightning-accordion-section name={task.Name} key={task.Id} label={task.Name}>
-                        <lightning-layout-item >
-                            <lightning-button-icon 
-                                    label='edit'
-                                    icon-name="utility:edit"
-                                    onclick={showTaskEditWindow}
-                                ></lightning-button-icon>
-                        </lightning-layout-item>
-                    
-                        <c-edit-task-window
-                        show-edit-task-window={showEditTaskWindow} 
-                        show-positive={showPositiveButton}
-                        positive-button-label={positiveButtonLabel} 
-                        show-negative={showNegativeButton}
-                        onpositive={closeTaskEditWindow}
-                        onclose={closeTaskEditWindow}
-                        task-todo-obj={task}/>
-                        </c-edit-task-window>
+                        <div class="info-block slds-grid slds-wrap">
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning-icon icon-name="custom:custom11" alternative-text="FinishDate" title="FinishDate"></lightning-icon>
+                                <template if:true={task.Start_Date__c}>
+                                    Start Date: <span>
+                                        <lightning-formatted-date-time value={task.Start_Date__c} year="numeric" 
+                                            month="numeric" day="numeric" hour="2-digit" minute="2-digit"
+                                                time-zone="UTC" time-zone-name="short" hour12="false"></lightning-formatted-date-time>
+                                        </span>
+                                </template>
+                                <template if:false={task.Start_Date__c}>
+                                    Start Date: <span>Date not set</span>
+                                </template>
+                            </div>
 
-                        <div class="slds-col slds-size_4-of-12">
-                                                            
-                            <template if:true={task.Start_Date__c}>
-                                Start Date: <span>{task.Start_Date__c}</span>
-                            </template>
-                            <template if:false={task.Start_Date__c}>
-                                Start Date: <span>Date not set</span>
-                            </template>
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning-icon icon-name="custom:custom53" alternative-text="Deadline" title="Deadline"></lightning-icon>
+                                <template if:true={task.Deadline_Date__c}>
+                                    Deadline Date: <span>
+                                                        <lightning-formatted-date-time value={task.Deadline_Date__c} year="numeric" 
+                                                            month="numeric" day="numeric" hour="2-digit" minute="2-digit"
+                                                                time-zone="UTC" time-zone-name="short" hour12="false"></lightning-formatted-date-time>
+                                                    </span>
+                                </template>
+                                <template if:false={task.Deadline_Date__c}>
+                                    Deadline Date: <span>Date not set</span>
+                                </template>
+                            </div>    
                         </div>
 
-                        <div class="slds-col slds-size_4-of-12">
-                            <template if:true={task.Deadline_Date__c}>
-                                Deadline Date: <span>{task.Deadline_Date__c}</span>
-                            </template>
-                            <template if:false={task.Deadline_Date__c}>
-                                Deadline Date: <span>Date not set</span>
-                            </template>
-                        </div>
-
-                        <div class="slds-col slds-size_4-of-12">
-                            <template if:true={task.Finish_Date__c}>
-                                Finish Date: <span>{task.Finish_Date__c}</span>
-                            </template>
-                            <template if:false={task.Finish_Date__c}>
-                                Finish Date: <span>Date not set</span>
-                            </template>
-                        </div>
-
-                        <div class="slds-col slds-size_4-of-12">
+                        <div class="info-block slds-grid slds-wrap">
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning-icon icon-name="custom:custom48" alternative-text="FinishDate" title="FinishDate"></lightning-icon>
+                                <template if:true={task.Finish_Date__c}>
+                                    Finish Date: <span>
+                                        <p><lightning-formatted-date-time value={task.Finish_Date__c} year="numeric" 
+                                            month="numeric" day="numeric" hour="2-digit" minute="2-digit"
+                                                time-zone="UTC" time-zone-name="short" hour12="false"></lightning-formatted-date-time></p>
+                                        </span>
+                                </template>
+                                <template if:false={task.Finish_Date__c}>
+                                    Finish Date: <span>Date not set</span>
+                                </template>
+                            </div>
+                            <div class="slds-col slds-size_6-of-12">
                                 Status: <span>{task.Status__c}</span>
+                            </div>
                         </div>
 
-                        <div class="slds-col slds-size_12-of-12 description">
-                            <template if:true={task.Description__c}>
-                                Description: <span>{task.Description__c}</span>
-                            </template>
-                            <template if:false={task.Description__c}>
-                                Description: <span>Description not set</span>
-                            </template>
+                        <div class="info-block slds-grid slds-wrap">
+                            <div class="slds-col slds-size_6-of-12">
+                                <template if:true={task.Description__c}>
+                                    Description: <span>{task.Description__c}</span>
+                                </template>
+                                <template if:false={task.Description__c}>
+                                    Description: <span>Description not set</span>
+                                </template>
+                            </div>    
+                            <div class="slds-col slds-size_6-of-12">
+                                <lightning-button-icon 
+                                label='edit'
+                                icon-name="utility:edit"
+                                onclick={showTaskEditWindow}
+                                ></lightning-button-icon>
+
+                                <c-edit-task-window
+                                show-edit-task-window={showEditTaskWindow} 
+                                show-positive={showPositiveButton}
+                                positive-button-label={positiveButtonLabel} 
+                                show-negative={showNegativeButton}
+                                onpositive={closeTaskEditWindow}
+                                onclose={closeTaskEditWindow}
+                                task-todo-obj={task}/>
+                                </c-edit-task-window> 
+                            </div>
                         </div>
+
+                        <c-sub-task-list task={task} onrefreshalert={refreshApexCode}> 
+                        </c-sub-task-list>
                         
-                        <div class="list-first">
-
-                            <lightning-layout class="slds-var-m-vertical_x-small"> 
-                                
-                                <lightning-layout-item flexibility="grow">
-                                    <h1 class="head-title">SubTasks</h1>
-                                 </lightning-layout-item>
-
-                                <lightning-layout-item >
-                                    <lightning-button variant="brand" label="Create SubTask" title="Create SubTask" 
-                                    onclick={showSubTaskAddWindow} class="slds-m-left_x-small"></lightning-button>
-                                </lightning-layout-item>
-                            
-                                <c-add-sub-task-window
-                                show-add-sub-task-window={showAddSubTaskWindow} 
-                                show-positive={showPositiveButton}
-                                positive-button-label={positiveButtonLabel} 
-                                show-negative={showNegativeButton}
-                                onpositive={closeSubTaskAddWindow}
-                                onclose={closeSubTaskAddWindow}
-                                task-todo-obj={task.Name}/>
-                                </c-add-sub-task-window>
-
-                            </lightning-layout>
-
-                            <template for:each={task.Subtasks_ToDo__r} for:item="subtask">
-                                <lightning-layout class="slds-var-m-vertical_x-small" key={subtask.Id}>   
-
-                                    <lightning-layout-item>
-                                        <lightning-input  class="slds-p-left_xx-large" checked={subtask.Done__c} type="checkbox"
-                                                            value={subtask.Done__c}  onchange={updateSubTaskStatus} data-recordid={subtask.Id} data-done={subtask.Done__c}>
-                                        </lightning-input>
-                                    </lightning-layout-item>
-                                
-                                    <lightning-layout-item flexibility="grow">
-                                            {subtask.Name}
-                                    </lightning-layout-item>
-
-                                    
-                                <lightning-layout-item >
-                                    <lightning-button-icon 
-                                            label='edit'
-                                            icon-name="utility:edit"
-                                            onclick={showSubTaskEditWindow}
-                                        ></lightning-button-icon>
-                                </lightning-layout-item>
-                            
-                                <c-edit-sub-task-window
-                                show-edit-sub-task-window={showEditSubTaskWindow} 
-                                show-positive={showPositiveButton}
-                                positive-button-label={positiveButtonLabel} 
-                                show-negative={showNegativeButton}
-                                onpositive={closeSubTaskEditWindow}
-                                onclose={closeSubTaskEditWindow}
-                                sub-task-obj={subtask}/>
-                                </c-edit-sub-task-window>
-
-                                    <lightning-layout-item>
-                                        <lightning-button-icon 
-                                            label='delete'
-                                            icon-name="utility:delete"
-                                            onclick={deleteSubTask}
-                                            data-recordid={subtask.Id}
-                                        ></lightning-button-icon>
-                                    </lightning-layout-item>
-                                
-                                </lightning-layout>
-                            </template>
-                        </div>
-
                     </lightning-accordion-section>
                    
                 </template>
