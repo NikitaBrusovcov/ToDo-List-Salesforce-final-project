@@ -83,7 +83,7 @@ export default class SubTaskList extends LightningElement {
                         variant: 'success'
                     })
                 );  
-                this.dispatchEvent(new CustomEvent('refreshAlert'));
+                this.dispatchEvent(new CustomEvent('refreshalert'));
             })
             .catch((error) => {
                 this.dispatchEvent(

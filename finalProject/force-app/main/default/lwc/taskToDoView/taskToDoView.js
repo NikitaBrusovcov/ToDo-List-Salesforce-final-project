@@ -23,12 +23,13 @@ export default class TaskToDoView extends LightningElement {
     }
 
     @track tasks;
+    wiredTaskResult;
     error;
 
     @track v_Offset=0;
     @track v_TotalRecords;
     @track page_size = 6;
-    wiredTaskResult;
+   
 
     @wire(getTaskToDoList,{ v_Offset: '$v_Offset', v_pagesize: '$page_size' } )
      wiredTasks(result){
@@ -46,6 +47,10 @@ export default class TaskToDoView extends LightningElement {
         TotalRecords().then(result=>{
             this.v_TotalRecords = result;
         });
+    }
+
+    renderedCallback(){
+        return refreshApex(this.wiredTaskResult);
     }
 
     previousHandler2(){

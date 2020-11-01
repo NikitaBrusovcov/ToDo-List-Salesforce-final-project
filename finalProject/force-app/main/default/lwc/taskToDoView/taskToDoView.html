@@ -7,18 +7,18 @@
         <div class="slds-var-m-around_medium">
             <lightning-accordion allow-multiple-sections-open>
                 <template for:each={tasks} for:item="task">
-                    <lightning-accordion-section name={task.Name} key={task.Id} label={task.Name}>
+                    <lightning-accordion-section class={task.RecordType.Name} name={task.Name} key={task.Id} label={task.Name}>
                         <div class="info-block slds-grid slds-wrap">
                             <div class="slds-col slds-size_6-of-12">
                                 <lightning-icon icon-name="custom:custom11" alternative-text="FinishDate" title="FinishDate"></lightning-icon>
-                                <template if:true={task.Start_Date__c}>
+                                <template if:true={task.CreatedDate}>
                                     Start Date: <span>
-                                        <lightning-formatted-date-time value={task.Start_Date__c} year="numeric" 
+                                        <lightning-formatted-date-time value={task.CreatedDate} year="numeric" 
                                             month="numeric" day="numeric" hour="2-digit" minute="2-digit"
                                                 time-zone="UTC" time-zone-name="short" hour12="false"></lightning-formatted-date-time>
                                         </span>
                                 </template>
-                                <template if:false={task.Start_Date__c}>
+                                <template if:false={task.CreatedDate}>
                                     Start Date: <span>Date not set</span>
                                 </template>
                             </div>

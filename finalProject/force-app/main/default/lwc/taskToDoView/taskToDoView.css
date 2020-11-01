@@ -17,4 +17,16 @@ span{
     margin-bottom:1%;
 }
 
+lightning-accordion-section{
+    border-left:25px solid;
+    margin-top:10px;
+}
+
+.MarcetingTaskToDo{
+    border-color:orange;
+}
+
+.DeveloperTaskToDo{
+    border-color:blue;
+}
 
